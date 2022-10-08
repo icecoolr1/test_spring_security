@@ -32,5 +32,11 @@ public class LoginController {
         return userLoginService.Login(customer);
     }
 
+    @PostMapping("/logout")
+    public ResponseResult<Map<String,Object>> userLogout(){
+
+        return userLoginService.LoginOut();
+    }
+
 
 }

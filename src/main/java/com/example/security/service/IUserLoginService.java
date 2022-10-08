@@ -8,4 +8,6 @@ import java.util.Map;
 
 public interface IUserLoginService {
      ResponseResult<Map<String,Object>> Login(Customer customer);
+
+     ResponseResult LoginOut();
 }

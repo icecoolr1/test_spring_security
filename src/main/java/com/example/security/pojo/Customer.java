@@ -19,7 +19,6 @@ import java.io.Serializable;
 public class Customer  implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableId
     private long userId;
     // 用户名
     private String userName;

@@ -8,6 +8,7 @@ import com.example.security.utils.RedisCache;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -51,5 +52,14 @@ public class UserLoginImpl implements IUserLoginService{
 
 
         return new ResponseResult<>(200, "成功", map);
+    }
+
+    @Override
+    public ResponseResult LoginOut() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginCustomer customer = (LoginCustomer) authentication.getPrincipal();
+        String userid = "login:"+ customer.getCustomer().getUserId();
+        redisCache.deleteObject(userid);
+        return new ResponseResult(200,"退出成功");
     }
 }
