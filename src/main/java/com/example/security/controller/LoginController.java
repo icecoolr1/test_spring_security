@@ -5,6 +5,7 @@ import com.example.security.domin.ResponseResult;
 import com.example.security.pojo.Customer;
 import com.example.security.service.ICustomerInterface;
 import com.example.security.service.IUserLoginService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ public class LoginController {
     IUserLoginService userLoginService;
 
     @GetMapping("/hello")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public List<Customer> Login(String username){
 
         return customerInterface.getAllCustomer();
@@ -33,7 +35,7 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    public ResponseResult<Map<String,Object>> userLogout(){
+    public ResponseResult userLogout(){
 
         return userLoginService.LoginOut();
     }

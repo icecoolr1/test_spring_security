@@ -54,7 +54,7 @@ public class SscFilter extends OncePerRequestFilter {
 
 
         //封装Auth对象
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginCustomer,null,null);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginCustomer,null,loginCustomer.getAuthorities());
 
         //放入SscontextHolder
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
