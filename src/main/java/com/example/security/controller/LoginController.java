@@ -22,7 +22,7 @@ public class LoginController {
     IUserLoginService userLoginService;
 
     @GetMapping("/hello")
-    @PreAuthorize("hasAnyAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('dev:pull123')")
     public List<Customer> Login(String username){
 
         return customerInterface.getAllCustomer();

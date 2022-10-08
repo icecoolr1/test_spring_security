@@ -1,6 +1,8 @@
 package com.example.security.config;
 
 import com.example.security.filter.SscFilter;
+import com.example.security.handler.AccessImpl;
+import com.example.security.handler.EnderPointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,10 @@ public class SscConfig  {
 
     @Resource
     SscFilter filter;
+    @Resource
+    AccessImpl access;
+    @Resource
+    EnderPointImpl enderPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -39,7 +45,7 @@ public class SscConfig  {
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
                 .antMatchers("/user/login").anonymous() //只允许未登录的访问
-//                .antMatchers("").permitAll() // 允许所有人
+                .antMatchers("/user/hello").permitAll() // 允许所有人
 //                .antMatchers("").authenticated() //登录才可以访问
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
@@ -47,6 +53,9 @@ public class SscConfig  {
 
         //把jwt的过滤器放在username过滤器之前
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        //告诉security如何处理异常
+        http.exceptionHandling().authenticationEntryPoint(enderPoint).accessDeniedHandler(access);
+
         return http.build();
     }
 

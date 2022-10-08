@@ -59,12 +59,12 @@ class TestSpringSecurityApplicationTests {
 //            System.out.println(customer);
 //        }
 
-
-        Customer customerById = customerMapper.getCustomerByName("sss");
-        System.out.println(customerById);
+//
+//        Customer customerById = customerMapper.getCustomerByName("sss");
+//        System.out.println(customerById);
 
         BCryptPasswordEncoder sad = new BCryptPasswordEncoder();
-        System.out.println(sad.encode("123"));
+        System.out.println(sad.encode("Wy20001976"));
 
     }
 
@@ -72,6 +72,11 @@ class TestSpringSecurityApplicationTests {
     void testggg(){
         String jwt = JwtUtil.createJWT("2");
         System.out.println(jwt);
+    }
+
+    @Test
+    void getPerms(){
+        System.out.println(customerMapper.getCustomerPerms(3));
     }
 
 

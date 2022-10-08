@@ -32,8 +32,8 @@ public class LoginService implements UserDetailsService {
         }
 
         //2 封装权限信息、
-        List<String> list = new ArrayList<>(Arrays.asList("hello","admin"));
-
+//        List<String> list = new ArrayList<>(Arrays.asList("hello","admin"));
+        List<String> list = customerMapper.getCustomerPerms(customer.getUserId());
         //3 返回UserDetails
         return new LoginCustomer(customer,list);
     }
